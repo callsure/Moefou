@@ -3,7 +3,7 @@
 # runshu.lin
 import os
 
-dirName = "/Users/xlin/Work/idea/Server/town-game-official/"
+dirName = 'G:\\works\\Server\\town-game-official\\town-game-wechat'
 oldStr = "192.168.0.235"
 newStr = "10.20.3.8"
 
@@ -11,7 +11,7 @@ def findall_files(dirName: str) -> list:
     collector = []
     for root, dirs, files in os.walk(dirName):
         for f in files:
-            if f == "pom.xml" or f == "bootstrap.properties":
+            if f == "pom.xml" or f.endswith(".properties"):
                 collector.extend([os.path.join(root, f)])
     return collector
 
@@ -21,12 +21,12 @@ for file in list:
     print(file)
     s = ''
     try:
-        with open(file,'r') as ff:
+        with open(file,'r', encoding='utf-8') as ff:
             txt = ff.read()
             s = txt.replace(oldStr, newStr)
     except Exception as e:
         print (e)
     # os.remove(file)
     # os.rename(file_bak, file)
-    with open(file,'w+') as fb:
+    with open(file,'w+', encoding='utf-8') as fb:
         fb.writelines(s)
